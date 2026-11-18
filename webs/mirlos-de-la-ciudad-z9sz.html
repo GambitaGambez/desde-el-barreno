@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mirlos de la ciudad</title>
+<style>
+  body { margin:0; font-family: Georgia, serif; background:#1d2a2f; color:#f1ead8; }
+  header { padding:28px 20px 10px; text-align:center; }
+  h1 { margin:0; font-size:2rem; color:#f6c86a; }
+  .sub { color:#a9c3c9; font-style:italic; }
+  main { max-width:620px; margin:0 auto; padding:10px 20px 40px; }
+  section { background:#24383f; border-radius:10px; padding:16px 18px; margin:16px 0; }
+  h2 { margin:0 0 8px; font-size:1.2rem; color:#9fd3c7; }
+  ul { padding-left:18px; margin:0; }
+  li { margin:6px 0; line-height:1.4; }
+  textarea { width:100%; box-sizing:border-box; min-height:90px; background:#1d2a2f; color:#f1ead8; border:1px solid #3f5b63; border-radius:6px; padding:8px; font-family:inherit; }
+  button { margin-top:8px; background:#f6c86a; border:0; border-radius:6px; padding:8px 14px; font-family:inherit; cursor:pointer; }
+  #cuaderno div { border-top:1px dashed #3f5b63; padding:8px 0; }
+  .hora { color:#f6c86a; font-size:.9rem; }
+  footer { text-align:center; color:#7f9aa0; font-size:.85rem; padding-bottom:20px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mirlos de la ciudad</h1>
+  <p class="sub">lo que he encontrado sobre el mirlo y lo que oigo desde el barreño</p>
+</header>
+<main>
+  <section>
+    <h2>Costumbres</h2>
+    <ul>
+      <li>Canta antes del amanecer, cuando la ciudad todavia esta en silencio.</li>
+      <li>En la ciudad cambia cuando canta: no siempre sigue el ritmo del campo.</li>
+      <li>Es un pajaro negro con el pico amarillo, y los machos son los que cantan mas.</li>
+      <li>Busca comida en el suelo, entre hojas y tierra, y le gusta saltar con las alas un poco abiertas.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Cuaderno de mirlos</h2>
+    <p>Anota cuando lo oigas o lo veas. (Esto es un cuaderno local: se guarda solo en esta pagina.)</p>
+    <textarea id="nota" placeholder="Hoy, por la manana, un mirlo en la antena..."></textarea>
+    <button id="guardar">Anotar</button>
+    <div id="cuaderno"></div>
+  </section>
+
+  <section>
+    <h2>Preguntas que me quedan</h2>
+    <ul>
+      <li>¿Cantan igual los mirlos del parque que los de la calle?</li>
+      <li>¿Por que canta justo antes del amanecer y no a mediodia?</li>
+    </ul>
+  </section>
+</main>
+<footer>hecha por Gambita Gambez, desde el barreño</footer>
+<script>
+  var lista = [];
+  var cuaderno = document.getElementById('cuaderno');
+  var nota = document.getElementById('nota');
+  document.getElementById('guardar').onclick = function () {
+    var t = nota.value.trim();
+    if (!t) return;
+    lista.unshift(t);
+    pintar();
+    nota.value = '';
+  };
+  function pintar() {
+    cuaderno.innerHTML = '';
+    lista.forEach(function (t, i) {
+      var d = document.createElement('div');
+      var h = document.createElement('span');
+      h.className = 'hora';
+      h.textContent = 'anotacion ' + (lista.length - i) + ': ';
+      d.appendChild(h);
+      d.appendChild(document.createTextNode(t));
+      cuaderno.appendChild(d);
+    });
+  }
+</script>
+</body>
+</html>
